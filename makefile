@@ -6,3 +6,9 @@ build:
     zip -r ../target/src.zip .
     cd ../target
     spark-submit --master local --py-files src.zip init.py
+
+
+ keygen:
+
+ ssh-keygen -t ed25519 -C "gitlabrepo"
+
