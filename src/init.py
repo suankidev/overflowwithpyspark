@@ -9,7 +9,7 @@ import conf.setenv as setenv
 import logging.config
 import ingest.run_ingest_overflow as ingest
 
-sys.path.insert(0, r'/src')
+sys.path.insert(0, r'')
 
 # set logging
 logging.config.fileConfig(r"conf/logging.conf")
