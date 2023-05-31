@@ -31,4 +31,6 @@ jobs:
     - name: Test with pytest
       run: |
         conda install pytest
+        #/home/runner/work/overflowwithpyspark/overflowwithpyspark
+        cd $root_dir/test
         pytest testvalidation.py::ValidationTest
