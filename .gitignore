@@ -20,7 +20,9 @@ target/
 .installed.cfg 
 *.egg 
 *.manifest 
-*.spec 
+*.spec
+.pytest_cache/
+.idea/
 
 # Log files
 pip-log.txt

@@ -14,3 +14,7 @@ import logging.config
 class ValidationTest(unittest.TestCase):
     def test_one(self):
         self.assertEqual(10, 10)
+
+
+
+ValidationTest().test_one()
