@@ -23,4 +23,5 @@ else:
     sys.path.insert(0, './python')
 
 if __name__ == '__main__':
-    ingest.ingest_data()
+    ingest.ingest_data()::q1
+
