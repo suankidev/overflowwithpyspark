@@ -1,4 +1,3 @@
-__pycache__
 *.py[cod]
 *$py.class
 
@@ -60,6 +59,7 @@ ipython_config.py
 
 # pyflow
 __pypackages__/
+__pycache__
 
 # Environment
 .env
