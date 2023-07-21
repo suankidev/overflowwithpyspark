@@ -25,3 +25,10 @@ def get_jdbc_df(metadata, spark):
 
 class SparkUtils:
     pass
+
+
+def find_name(iterator,finder,expected):
+    for name in iterator:
+        if finder(name) == expected:
+            print("found")
+    print(__name__)

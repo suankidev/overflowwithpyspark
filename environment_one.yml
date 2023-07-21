@@ -181,4 +181,4 @@ dependencies:
     - y-py==0.5.9
     - ypy-websocket==0.8.2
     - zipp==3.13.0
-prefix: C:\Users\sujee\anaconda3\envs\pyspark_dev_env
+prefix: ./env

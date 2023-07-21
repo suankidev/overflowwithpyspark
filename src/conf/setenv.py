@@ -9,5 +9,6 @@ base_path = r"C:\Users\sujee\Desktop\spark_input\stack-overflow-developer-survey
 if user == 'sujee':
     master = 'local[2]'
     env = 'test'
+    base_path = r"C:\Users\sujee\pydev\overflowwithpyspark\resources"
 
 
