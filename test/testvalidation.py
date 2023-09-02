@@ -15,3 +15,10 @@ class ValidationTest(unittest.TestCase):
     def test_one(self):
         self.assertEqual(10, 10)
 
+
+    def test_two(self):
+        d = {"A":1,"B":2}
+        for k,v in enumerate(d):
+            print(k,v)
+        self.assertEqual(10,10)
+
