@@ -11,6 +11,10 @@ type(ages_list[2])
 
 # COMMAND ----------
 
+spark.createDataFrame(ages_list)
+
+# COMMAND ----------
+
 spark.createDataFrame(ages_list, 'age int')
 
 # COMMAND ----------
