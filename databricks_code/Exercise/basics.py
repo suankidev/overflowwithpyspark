@@ -197,8 +197,6 @@ users = [(1,
   datetime.datetime(2021, 4, 2, 0, 55, 18))]
 
 
-
-
 # COMMAND ----------
 
 # MAGIC %md
@@ -218,7 +216,8 @@ users_schema = '''
 '''
 
 #or
-
+from pyspark.sql.types import StructType,StructField
+from pyspark.sql.types import IntegerType,StringType,BooleanType,FloatType,TimestampType,DateType
 users_schema = StructType([
     StructField('id', IntegerType()),
     StructField('first_name', StringType()),
@@ -583,8 +582,16 @@ user_df.select('id','phone_numbers.*','phone_numbers.mobile' ).show(truncate=Fal
 
 # COMMAND ----------
 
+user_struct_df.select('id','phone_numbers.*','phone_numbers.mobile' ).show(truncate=False)
+
+# COMMAND ----------
+
 user_df.select('id','phone_numbers').show(truncate=False)
 
 # COMMAND ----------
 
+user_df.select('id',col('phone_numbers')['mobile']).show(truncate=False)
 
+# COMMAND ----------
+
+user_struct_df.select('id','phone_numbers.*',col('phone_numbers')['mobile'] ).show(truncate=False)
