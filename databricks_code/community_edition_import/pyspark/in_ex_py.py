@@ -1,6 +1,30 @@
 # Databricks notebook source
 
 
+
+
+
+
+
+
+
+
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
 """
 #first part:
 spark:
@@ -79,12 +103,6 @@ logical plan:  (usercode -> unresolved logical plan --catalog(analyser)-->rsolve
 ====> execute on cluster(on low level RDD)
 
 
-
-
-
- 
-
-
 parquet:  open source,  self describing(metadata, shcema), columnur storage
 
 
@@ -144,31 +162,32 @@ def basic_rdd():
     
     words = spark.sparkContext.parallelize(myCollection)
     
-    print(words.collect())
+    # print(words.collect()) #['Spark', 'The', 'Definitive', 'Guide', ':', 'Big', 'Data', 'Processing', 'Made', 'Simple', 'Spark']
     
     #find if it's start with S
     d = words.filter(lambda x: x.startswith('S'))
-    
-    #map the input according to  the o/p
+    # print("filter data {}".format(d.collect()))
+
+    #map the input according to the o/p
     d = words.map(lambda x: x) ##['Spark', 'The', 'Definitive', 'Guide', ':', 'Big', 'Data', 'Processing', 'Made', 'Simple']
     d = words.map(lambda x: x.split(' '))   ###[['Spark'], ['The'], ['Definitive'], ['Guide'], [':'], ['Big'], ['Data'], ['Processing'], ['Made'], ['Simple']]
-    #print(d.collect())
-    #print(d.toDF().show())
+    # print(d.collect())
+    # d.toDF('name string').show()
 
     d = words.flatMap(lambda x: x)
-    #print(d.collect())
+    # print(d.collect())
     
     d = words.flatMap(lambda x: x).map(lambda x: x.split(' '))
-    #print(d.collect())
+    # print(d.collect())
     
     
     #short the words according to letter
     d = words.sortBy(lambda x: len(x))
-    #print(d.collect())
+    print(d.collect())
     
     d = words.map(lambda x: (len(x), x))
     d = d.sortByKey()
-    #print(d.collect())
+    print(d.collect())
     
     #find largest word
     d = words.reduce(lambda x,y: x if len(x)>len(y) else y)
@@ -178,7 +197,7 @@ def basic_rdd():
     d=words.map(lambda x: (x,1)).reduceByKey(lambda x,y: x+y)
     print(d.collect())
 
-#basic_rdd()
+basic_rdd()
 
 
 def basic_one():
@@ -188,13 +207,27 @@ def basic_one():
     spark.createDataFrame(names, ["name", "age"]).show()
     spark.sparkContext.parallelize(names).toDF(["name", "age"]).show()  
 
-basic_one()
+#basic_one()
 
 
 # COMMAND ----------
 
-file_location = "/FileStore/tables/retail-data/2010_12_08.csv"
-random_file = "dbfs:/FileStore/tables/tstfile.csv"
+dbutils.fs.ls('dbfs:/public/retail_data')
+
+# COMMAND ----------
+
+
+col = "this is a test file for bigdata analytics test".split(" ")
+
+myrdd = spark.sparkContext.parallelize(col)
+
+myrdd.filter(lambda x: x.endswith('t').collect()
+
+
+# COMMAND ----------
+
+file_location = "dbfs:/public/retail_data/2010-12-08.csv"
+random_file = "dbfs:/public/testfile/tstfile.csv"
 
 
 #display(dbutils.fs.ls("/FileStore/tables/"))
@@ -210,8 +243,8 @@ def get_rdd(file):
 retail_rdd = get_rdd(file_location)
 random_rdd = get_rdd(random_file)
 
-#print(retail_rdd.take(5))
-#print(random_rdd.collect())
+# print(retail_rdd.take(5))
+# print(random_rdd.collect())
 
 
 #remove the header from file
@@ -230,14 +263,16 @@ d = d.filter(lambda x: x[2] != False)
 from pyspark.sql.functions import trim
 #calculate no of times Kharadi came in the random_rdd file
 
-#print(random_rdd.collect())
-
+print(random_rdd.take(2))
+print()
+print(random_rdd.map(lambda x: (x,1)).collect())
 #split records
 d = random_rdd.flatMap(lambda x: x.split(","))  #['val|name', '1257.577|A', '3683648.3837|B', '', '', 'EON Free Zone', ' Phase 2', ' Kharadi' ....
+# print(d.collect())
 d = d.map(lambda x: (x.strip(),1))
+# print(d.collect())
 d = d.reduceByKey(lambda x,y:x+y)
-
-#print(d.collect())
+# print(d.collect())
 
 #print(d.filter(lambda x: x[0] == 'Kharadi').collect())
 
@@ -300,7 +335,7 @@ key_value_based_rdd()
 
 # COMMAND ----------
 
-file_location = "/FileStore/tables/retail-data/2010_12_08.csv"
+file_location = "dbfs:/public/retail_data/2010-12-08.csv"
 
 d = spark.sparkContext.textFile(file_location)
 
@@ -308,19 +343,19 @@ h = d.first()
 
 d = d.filter(lambda x: x != h)
 d = d.map(lambda x: x.split(","))
-#display(d.take(5))
+display(d.take(5))
 temp = d
 
 #d = d.map(lambda x: (x[7],x[:7]))
 d = d.map(lambda x: (x[7],x[0]))
 grp = d.groupBy(lambda x: x[0]).mapValues(list)
 
-#print(grp.collect())
+# print(grp.collect())
 
 
 grp = temp.map(lambda x: (x[7], x[0])).groupByKey()
 
-print(grp.collect())
+#print(grp.collect())
 #print(grp.mapValues(min).collect())
 # d = grp.map(lambda x: (x[0], list(x[1])))
 
@@ -399,7 +434,7 @@ for i, j in enumerate(test):
 # COMMAND ----------
 
 # File location and type
-file_location = "/FileStore/tables/retail-data/*.csv"
+file_location = "dbfs:/public/retail_data/*.csv"
 file_type = "csv"
 
 # CSV options
@@ -450,7 +485,7 @@ stock_code = {'DOT', '71053', 'test'}
 retail_df.where(col('StockCode').isin(*stock_code)).show(5, False)
 
 retail_df.where(~ (dot_code_filter & (price_filter | descriptor_filter))).\
- select('description', 'unitprice').show()
+ select('description', 'unitprice')#.show()
 
 
 
@@ -535,10 +570,11 @@ def color_locator(column, color_string):
         .cast("boolean") \
         .alias("is_" + color_string)
 
-selected_columns = [color_locator(retail_df.Description, c) for c in simple_color]
+selected_columns = [color_locator(col('description'), c) for c in simple_color]
 
 selected_columns.append(expr("*"))  # has to a be Column type
 
+# retail_df.select(*selected_columns).show()
 df = retail_df.select(*selected_columns).where(expr("is_white OR is_red")) \
     .select("Description")
 
@@ -554,7 +590,7 @@ print(pattern)
 
 #or
 df = retail_df.withColumn('check', regexp_extract(col('description'), pattern, 0)).filter(col('check') != '')
-df.show(5, truncate=False)
+#df.show(5, truncate=False)
 
 #df.dtypes
 
