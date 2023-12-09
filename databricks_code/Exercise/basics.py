@@ -16,6 +16,10 @@ user_df=spark.createDataFrame(users_list,'id int,name string')
 
 # COMMAND ----------
 
+print("this is test")
+
+# COMMAND ----------
+
 user_df.show()
 
 # COMMAND ----------
