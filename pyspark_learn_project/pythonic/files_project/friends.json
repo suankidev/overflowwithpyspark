@@ -1,0 +1,17 @@
+{
+  "friends" :[
+  {
+    "name": "Sujeet",
+    "Degree": "Graduation, B.Tech"
+  },
+  {
+    "name": "Ramesh",
+    "Degree": "Post Graduation, M.Tech"
+  },
+  {
+    "name": "Rajesh",
+    "Degree": "Masters,CS"
+  }
+]
+
+}
