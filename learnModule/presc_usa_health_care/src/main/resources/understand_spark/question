@@ -1,0 +1,20 @@
+What is spark?
+
+-> spark is unified computing engine with diffrent sets of lib
+      for parallel data processing on cluster
+   unified: b/c it provide different set of api on same engine
+
+   feature:  fault tolrance, in memory processing, parllel processing
+             lazy evaluation, stream processing
+
+
+
+what is DAG and how it works?
+
+--> Direct acyclic graph
+    direct:
+    acyclic:
+    graph:
+The vertices represent RDDs and the edges
+represent the operations to be performed on RDDs sequentially.
+    1. operator graph --> dag scheduler==> stages--> task shuduler--. execitpr
