@@ -100,8 +100,8 @@ def main():
         df_presc_final = presc_report(df_city_sel, df_fact_sel)
 
         # validate
-        df_top10_rec(final_presc_report, 'final_presc_report')
-        df_print_schema(final_presc_report, 'final_presc_report')
+        df_top10_rec(df_presc_final, 'final_presc_report')
+        df_print_schema(df_presc_final, 'final_presc_report')
 
         ### Initiate run_data_extraction Script
         CITY_PATH = gav.output_city

@@ -4,7 +4,7 @@ import sys
 
 import get_all_variables as gav
 from create_objects import get_spark_object
-from src.main.python.bin.presc_run_data_preprocessing import perform_data_clean
+from presc_run_data_preprocessing import perform_data_clean
 from validation import get_curr_date, df_count, df_top10_rec, df_print_schema
 import logging.config
 import logging
