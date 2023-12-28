@@ -1,0 +1,17 @@
+spark-class org.apache.spark.deploy.master.Master                    --will start the master on ip
+spark-class org.apache.spark.deploy.worker.Worker spark://192.168.56.1:7077	    ---will start the worker node on the master ip
+spark-shell --master spark://192.168.56.1:7077
+
+
+spark-submit --master spark://192.168.56.1:7077  --class com.suanki.App target/udemycourse-1.0-SNAPSHOT.jar
+
+spark-submit --master spark://192.168.56.1:7077  \
+--deploy-mode cluster \
+--class com.suanki.App \
+target/udemycourse-1.0-SNAPSHOT.jar
+
+spark-submit --master spark://192.168.56.1:7077  --deploy-mode cluster \
+ --conf spark.driver.extraClassPath=.\config-1.4.2.jar;.\ojdbc6-11.2.0.4.jar \
+ --class com.siya.TestRunner \
+ C:\Users\sujee\Desktop\siya-ltd\target\siya-ltd-prod.jar dev.mode \
+ --files C:\Users\sujee\Desktop\siya-ltd\src\main\resources\app.properties
