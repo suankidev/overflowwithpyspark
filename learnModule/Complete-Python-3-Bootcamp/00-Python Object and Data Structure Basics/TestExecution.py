@@ -1,9 +1,9 @@
+import os
 print("="*50)
 
-
-t = set()
-
-print(type(t))
+c  = "test"
+os.system('cls')
+print(c.isalpha())
 
 
 print("="*50)
