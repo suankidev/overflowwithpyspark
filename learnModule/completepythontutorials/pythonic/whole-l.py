@@ -1804,7 +1804,7 @@ ValueError
 
 
 
-1. every exception in python is class
+1.every exception in python is class
 2.customized exception handling
 
 
@@ -2643,7 +2643,6 @@ print(org.roll)
 
 
 # in the form of dictionay all variables
-
 print(org.__dict__)
 
 # %%
@@ -2716,9 +2715,10 @@ class Strudent:
            Student.var='suanki ltd'
 
 """
+#%%
 
 
-class student:
+class Student:
     # static var
     name = 'suanki ltd'
 
@@ -2741,7 +2741,6 @@ class student:
         hi = 'hello'
 
     '''or'''
-
     def mystaticmethod2(x, y):
         '''also a static method b/c wihtoud sellf'''
         print(x + y)
@@ -2923,7 +2922,6 @@ b3 = Book(20)
 # magic methods are there which is defined in object class
 
 print(b1 + b2)
-
 print(b1 != b2)
 print(b1 != b3)
 
@@ -2982,7 +2980,7 @@ class Test:
         print('no args')
 
     def m1(self, a):
-        print('no args')
+        print('one args')
 
     def m1(self, a, b):
         print('except this all above method m1 will be replaced')
@@ -2997,7 +2995,7 @@ class Test:
 t = Test()
 
 # t.m1() only one method will be there which is last remaining will be replaced
-t.m1(10, 20)
+t.m1(10,20)
 
 # %%
 '''
@@ -3012,6 +3010,7 @@ interfaces
 import abc
 
 
+
 # abstract class
 # partially implemented class
 class Vehicle(abc.ABC):
@@ -3019,6 +3018,7 @@ class Vehicle(abc.ABC):
     @abc.abstractmethod
     def getnoofWheel(self):
         pass
+        
 
 
 # if class extending abc class and contains atleast one
@@ -3036,10 +3036,10 @@ class Bus(Vehicle):
 
 Bus().getnoofWheel()
 
-
+#%%
 # interface does not contain concrete method mean
 # if all is same as abstract
-
+import abc
 
 class Dbinterface(abc.ABC):
     @abc.abstractmethod
@@ -3061,11 +3061,12 @@ class oraclecon(Dbinterface):
 
 
 # convert input str into class global() return dictionary
+print(globals())
+x = "sql" # input('enter dbname')
 
-x = input('enter dbname')
-
-classname = globals()[x]
-classname.connect()
+# classname = globals()[x]
+# print(classname)
+# classname.connect()
 # %%
 
 '''
@@ -3076,12 +3077,92 @@ public,private ,protected
 class x:
     def __init__(self) -> None:
         # private variable by double __
-        self.__x = 10
+        self.__x = 20
+        self.y = 10
 
+    def getx(self):
+        return self.__x
 
+print(x().y)
+
+print(x().getx())
 # outside class not accessible outside class
-# x().__x
+print(x().__x)
 
+
+#%%
+
+
+# super class
+class Super:
+     
+     # public data member
+     var1 = None
+ 
+     # protected data member
+     _var2 = None
+      
+     # private data member
+     __var3 = None
+     
+     # constructor
+     def __init__(self, var1, var2, var3):  
+          self.var1 = var1
+          self._var2 = var2
+          self.__var3 = var3
+     
+    # public member function   
+     def displayPublicMembers(self):
+  
+          # accessing public data members
+          print("Public Data Member: ", self.var1)
+        
+     # protected member function   
+     def _displayProtectedMembers(self):
+  
+          # accessing protected data members
+          print("Protected Data Member: ", self._var2)
+      
+     # private member function   
+     def __displayPrivateMembers(self):
+  
+          # accessing private data members
+          print("Private Data Member: ", self.__var3)
+ 
+     # public member function
+     def accessPrivateMembers(self):     
+           
+          # accessing private member function
+          self.__displayPrivateMembers()
+  
+# derived class
+class Sub(Super):
+  
+      # constructor 
+       def __init__(self, var1, var2, var3): 
+                Super.__init__(self, var1, var2, var3)
+           
+      # public member function 
+       def accessProtectedMembers(self):
+                 
+                # accessing protected member functions of super class 
+                self._displayProtectedMembers()
+  
+# creating objects of the derived class     
+obj = Sub("Geeks", 4, "Geeks !") 
+ 
+# calling public member functions of the class
+obj.displayPublicMembers()
+obj.accessProtectedMembers()
+obj.accessPrivateMembers() 
+ 
+# Object can access protected member
+print("Object is accessing protected member:", obj._var2)
+ 
+# object can not access private member, so it will generate Attribute error
+#print(obj.__var3)
+
+        
 # %%
 class Student:
     def __init__(self, name, roll):
@@ -3095,6 +3176,9 @@ class Student:
 def main():
     s1 = Student('rajoo', 1234)
     print(s1)
+
+
+main()
 
 
 # %%
