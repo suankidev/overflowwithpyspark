@@ -110,3 +110,7 @@ GitHub.sublime-settings
 
 # Hidden files
 .
+
+#heavy resources
+./resources/data/
+resources/data/

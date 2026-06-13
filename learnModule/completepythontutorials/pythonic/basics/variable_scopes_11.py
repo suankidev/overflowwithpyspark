@@ -46,8 +46,6 @@ def outer():
 		x = 'inner x'
 		print(x)
 		print(y)
-lemktpr
-lemktpr
 
 	inner()
 	print(x)
